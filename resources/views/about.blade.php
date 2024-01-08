@@ -4,7 +4,7 @@
     {{-- About Section --}}
     <section class="bg-white dark:bg-gray-900 md:min-h-screen grid">
         <div
-            class="grid max-w-screen-xl px-6 mx-auto gap-12 xl:gap-16 lg:px-16 md:px-12 lg:grid-cols-12 mt-24 mb-16 md:mt-16">
+            class="grid max-w-screen-xl px-6 mx-auto gap-12 xl:gap-16 lg:px-16 md:px-12 lg:grid-cols-12 mt-24 mb-16 md:mt-20">
             <div class="lg:col-span-5 lg:flex place-self-center px-8">
                 <img src=".\img\model1.png" class="object-cover w-max h-max" alt="">
             </div>
