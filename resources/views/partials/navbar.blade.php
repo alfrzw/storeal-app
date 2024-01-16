@@ -22,12 +22,12 @@
         </div>
         {{-- Nav Menu --}}
         <div class="place-items-center hidden lg:flex lg:gap-x-12">
-            <a class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ Request::is('/') ? 'text-primary' : '' }}"
+            <a class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ ($active === "home") ? 'text-primary' : '' }}"
                 href="/">Home</a>
             <a href="/about"
-                class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ Request::is('about') ? 'text-primary' : '' }}">About</a>
-            <a href="/our-products"
-                class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ Request::is('our-products') ? 'text-primary' : '' }}">Our
+                class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ ($active === "about") ? 'text-primary' : '' }}">About</a>
+            <a href="/products"
+                class="text-md font-medium leading-6 text-gray-900 hover:text-secondary {{ ($active === "products") ? 'text-primary' : '' }}">Our
                 Products</a>
         </div>
         {{-- Login Button --}}
@@ -71,7 +71,7 @@
                     <div class="space-y-2 py-6">
                         <a href="/" class="-mx-3 block px-3 py-2 text-base font-medium leading-7 text-gray-900 hover:bg-secondary hover:text-white {{ Request::is('/') ? 'bg-primary text-white' : '' }}">Home</a>
                         <a href="/about" class="-mx-3 block px-3 py-2 text-base font-medium leading-7 text-gray-900 hover:bg-secondary hover:text-white {{ Request::is('about') ? 'bg-primary text-white' : '' }}">About</a>
-                        <a href="/our-products" class="-mx-3 block px-3 py-2 text-base font-medium leading-7 text-gray-900 hover:bg-secondary hover:text-white {{ Request::is('our-products') ? 'bg-primary text-white' : '' }}">Our Products</a>
+                        <a href="/products" class="-mx-3 block px-3 py-2 text-base font-medium leading-7 text-gray-900 hover:bg-secondary hover:text-white {{ Request::is('products') ? 'bg-primary text-white' : '' }}">Our Products</a>
                     </div>
                     <div class="py-6 block">
                         <a href="#" class="-mx-3 block items-center px-3 py-2.5 text-base font-medium leading-7 text-gray-900 hover:bg-secondary hover:text-white">Log in</a>

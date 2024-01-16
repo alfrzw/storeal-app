@@ -2,67 +2,43 @@
 
 namespace App\Models;
 
-class Product
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
 {
-    private static $products = [
-        [
-            "product" => "Hoodie Black Abstract Rainbow V1.0",
-            "slug" => "product-1",
-            "img" => "product1.png",
-            "category" => "1",
-            "price" => "2000000",
-            "stock" => "23"
-        ],
-        [
-            "product" => "Hoodie Gray Cassete Tape Colorful",
-            "slug" => "product-2",
-            "img" => "product2.png",
-            "category" => "1",
-            "price" => "3500000",
-            "stock" => "27"
-        ],
-        [
-            "product" => "Hoodie Dark Gray Mushroom",
-            "slug" => "product-3",
-            "img" => "product3.png",
-            "category" => "1",
-            "price" => "1890000",
-            "stock" => "12"
-        ],
-        [
-            "product" => "Hoodie Black Splash Paint",
-            "slug" => "product-4",
-            "img" => "product4.png",
-            "category" => "1",
-            "price" => "3300000",
-            "stock" => "18"
-        ],
-        [
-            "product" => "Hoodie Gray Mushroom V2.1",
-            "slug" => "product-5",
-            "img" => "product3.png",
-            "category" => "1",
-            "price" => "3300000",
-            "stock" => "18"
-        ],
-        [
-            "product" => "Hoodie Gray Casette Tape Vintage Limited Edition",
-            "slug" => "product-6",
-            "img" => "product2.png",
-            "category" => "1",
-            "price" => "3300000",
-            "stock" => "18"
-        ],
+    use HasFactory;
+
+    // protected $fillable = [
+    //     'product',
+    //     'price',
+    //     'stock',
+    //     'desc'
+    // ];
+
+    protected $guarded = [
+        'id'
     ];
 
-    public static function all()
+    protected $with = [
+        'category'
+    ];
+
+    public function scopeFilter($query, array $filters)
     {
-        return collect(self::$products);
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('product', 'like', '%' . $search . '%');
+        });
+
+        $query->when($filters['category'] ?? false, function($query, $category) {
+            return $query->whereHas('category', function($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
     }
 
-    public static function find($slug)
+    public function category()
     {
-        $products = static::all();
-        return $products->firstWhere('slug', $slug);
+        return $this->belongsTo(Category::class);
     }
 }
